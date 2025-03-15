@@ -36,7 +36,7 @@ Folgende Schritte sind zur Vorbereitung notwendig:
     ```powershell
     wsl --install
     ```
-    Dadurch sollte WSL2 mit der Standarddistribution Ubuntu Linux installiert werden.
+    Dadurch sollte WSL2 mit der Standard-Distribution Ubuntu Linux installiert werden.
 4. Zur Sicherheit das System neu starten
 5. Nun kann auf den normalen Benutzer gewechselt werden
 6. Es sollte nun im Startmenü Ubuntu verfügbar sei, wenn nicht,
@@ -70,13 +70,14 @@ Dazu folgende Befehle im Terminal von VS Code (oder Ubuntu Terminal aus dem Star
     ```
     Alle Fragen akzeptieren und auch die letzte Frage mit Ja (yes oder y) beantworten.
 14. Damit ist Conda installiert, aber noch nicht im Terminal verfügbar. Dazu muss das Terminal neu instanziert werden, sprich Terminal schließen und wieder öffnen, danach wieder mit "cd" ins "work" Verzeichnis wechseln.
-15. Nun ist es eine gute Idee, auch git LFS (Git Large File Storage) nachzuinstallieren, da ich so das komplette Repository von pypsa-eur-evt zur verfügung stellen kann, dass auch alle Datensätze direkt beinhaltet.
+15. Nun kann entweder der master Branch heruntergeladen werden, um mit der aktuellsten Version zu arbeiten, oder es wird LFS (Large File Storage) genutzt, um schneller die benötigten Datensätze herunterzuladen. Hier spielt der Vorteil eine Rolle, dass das originale PyPSA-Eur Repository auf unserem MUL-Gitlab Server gespiegelt wurde.
+Daher ist es je nach Bedarf eine gute Idee, auch git LFS (Git Large File Storage) nachzuinstallieren, da ich so die kompletten Daten meiner Versuche mit pypsa-eur zur verfügung stellen kann. Dazu existiert jetzt ein eigener branch "lfs-dataset".
     ```bash
     sudo apt update && sudo apt install -y git-lfs # Hier wird das sudo Passwort verlangt. Das ist das Benutzerpasswort.
     ```
-16. Nun kann das Repository heruntergeladen werden. Entweder geschieht das über die [offizielle Github Seite](https://github.com/PyPSA/pypsa-eur) oder direkt mit allen Datensätzen über das Repository auf unserem Uni-Gitlab Server, dass ich extra dafür erstellt habe. Es sollten alle Unimitarbeiter Zugriff darauf haben.
+16. Nun kann das Repository heruntergeladen werden. Entweder geschieht das über die [offizielle Github Seite](https://github.com/PyPSA/pypsa-eur), [über das Repository am MUL-Gitlab](https://git.unileoben.ac.at/evt1/pypsa-eur-evt) oder direkt mit allen Datensätzen über den lfs-dataset branch, der extra dafür erstellt wurde. Es sollten alle EVT-Mitarbeiter Zugriff darauf haben.
     ```bash
-    git lfs clone https://git.unileoben.ac.at/m01435615/pypsa-eur-evt -b master # Hier wird der User und Passwort verlangt, der zur Anmeldung bei Gitlab verwendet wird (Muonline Account).
+    git lfs clone https://git.unileoben.ac.at/evt1/pypsa-eur-evt -b lfs-dataset # Hier wird der User und Passwort verlangt, der zur Anmeldung bei Gitlab verwendet wird (Muonline Account).
     ```
     Dieser Prozess kann ein paar Minuten dauern, da ca. 30 GB heruntergeladen werden.
 17. Ist das Repository gecloned können wir nun direkt im VS Code Hauptfenster weiterarbeiten. Dazu gehen wir auf "File" --> "Open Folder" und wählen im Popup-Dialog unter "work/pypsa-eur-evt" den Projektordner aus.
