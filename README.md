@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+SPDX-FileCopyrightText: 2017-2024 The PyPSA-Eur Authors
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
@@ -9,9 +9,24 @@ SPDX-License-Identifier: CC-BY-4.0
 ![Size](https://img.shields.io/github/repo-size/pypsa/pypsa-eur)
 [![Zenodo PyPSA-Eur](https://zenodo.org/badge/DOI/10.5281/zenodo.3520874.svg)](https://doi.org/10.5281/zenodo.3520874)
 [![Zenodo PyPSA-Eur-Sec](https://zenodo.org/badge/DOI/10.5281/zenodo.3938042.svg)](https://doi.org/10.5281/zenodo.3938042)
-[![Snakemake](https://img.shields.io/badge/snakemake-≥8.14.0-brightgreen.svg?style=flat)](https://snakemake.readthedocs.io)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥7.7.0-brightgreen.svg?style=flat)](https://snakemake.readthedocs.io)
 [![REUSE status](https://api.reuse.software/badge/github.com/pypsa/pypsa-eur)](https://api.reuse.software/info/github.com/pypsa/pypsa-eur)
 [![Stack Exchange questions](https://img.shields.io/stackexchange/stackoverflow/t/pypsa)](https://stackoverflow.com/questions/tagged/pypsa)
+
+# PyPSA-Eur - EVT Fork
+Dies ist ein Fork von PyPSA-Eur. Diese Bestandsaufnahme dient dazu, eine stabile Umgebung für die Mitarbeiter des Lehrstuhls zur Verfügung zu stellen.
+
+Zur schnellen Installation am Arbeitsrechner und Verwendung bitte **diesem Link zum Tutorial** folgen: [Tutorial PyPSA-Eur am EVT unter Windows](tutorial-evt/)
+
+Der Rest der Readme-Datei stammt aus dem originalen Projekt und kann gerne nach Lust und Laune studiert werden:
+
+---
+
+---
+
+
+
+
 
 # PyPSA-Eur: A Sector-Coupled Open Optimisation Model of the European Energy System
 
