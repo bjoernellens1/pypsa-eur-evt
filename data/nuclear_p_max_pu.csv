@@ -1,17 +1,3 @@
-country,factor
-BE,0.883
-BG,0.876
-CZ,0.839
-FI,0.924
-FR,0.616
-DE,0.926
-HU,0.891
-NL,0.901
-RO,0.906
-SK,0.908
-SI,0.884
-ES,0.883
-SE,0.817
-CH,0.834
-GB,0.684
-UA,0.701
+version https://git-lfs.github.com/spec/v1
+oid sha256:842482884031b83fa4a102147520b9e6faff595ed39f52b9ac15df2fb9dd5f9a
+size 146
