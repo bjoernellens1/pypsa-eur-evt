@@ -77,9 +77,15 @@ Daher ist es je nach Bedarf eine gute Idee, auch git LFS (Git Large File Storage
     ```
 16. Nun kann das Repository heruntergeladen werden. Entweder geschieht das über die [offizielle Github Seite](https://github.com/PyPSA/pypsa-eur), [über das Repository am MUL-Gitlab](https://git.unileoben.ac.at/evt1/pypsa-eur-evt) oder direkt mit allen Datensätzen über den lfs-dataset branch, der extra dafür erstellt wurde. Es sollten alle EVT-Mitarbeiter Zugriff darauf haben.
     ```bash
-    git lfs clone https://git.unileoben.ac.at/evt1/pypsa-eur-evt -b lfs-dataset # Hier wird der User und Passwort verlangt, der zur Anmeldung bei Gitlab verwendet wird (Muonline Account).
+    git clone https://git.unileoben.ac.at/evt1/pypsa-eur-evt -b lfs-dataset # Hier wird der User und Passwort verlangt, der zur Anmeldung bei Gitlab verwendet wird (Muonline Account).
     ```
     Dieser Prozess kann ein paar Minuten dauern, da ca. 30 GB heruntergeladen werden.
+
+    **Alternative:**
+    Wenn nicht die vollen Daten benötigt werden, reicht es, nur den master Branch herunterzuladen. Dazu folgenden Befehl verwenden:
+    ```bash
+    git clone https://git.unileoben.ac.at/evt1/pypsa-eur-evt.git --single-branch -b master
+    ```
 17. Ist das Repository gecloned können wir nun direkt im VS Code Hauptfenster weiterarbeiten. Dazu gehen wir auf "File" --> "Open Folder" und wählen im Popup-Dialog unter "work/pypsa-eur-evt" den Projektordner aus.
 Damit ist die Umgebung in VS Coder geöffnet. Von hier aus wird mit Pypsa-Eur weitergearbeitet.
 VS Code merkt sich diesen Pfad, daher kann er in Zukunft direkt nach dem Programmstart ausgewählt werden:
