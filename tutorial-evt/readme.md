@@ -115,7 +115,7 @@ Obige Schritte waren zur Einrichtung von Windows notwendig. Jetzt kann PyPSA-Eur
     snakemake solve_elec_networks --configfile config/test/config.electricity.yaml
     ```
 5. Vor weiteren Aufrufen von Snakmake ist es empfehlenswert, die Überbleibsel der Zwischenschritte der Pipeline zu leeren. Das kann einigen Problemen vorbeugen.
-   Befehl mit ``y``` quittieren. 
+   Befehl mit **y** quittieren. 
     ```bash
     snakemake purge
     ```
