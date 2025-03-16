@@ -20,7 +20,7 @@ Derzeit wird dieses Repository mit dem upstream PyPSA-Eur Github repository abge
 
 Zur schnellen Installation am Arbeitsrechner bitte **diesem Link zum Tutorial** folgen: [Tutorial PyPSA-Eur am EVT unter Windows](tutorial-evt/)
 
-Die großen Datensätze sind nun in einem extra Branch [lfs-dataset](https://git.unileoben.ac.at/evt1/pypsa-eur-evt/-/tree/lfs-dataset) untergebracht.
+Um den master-Branch sauber zu halten, sind die großen Datensätze nun in einem extra Branch [lfs-dataset](https://git.unileoben.ac.at/evt1/pypsa-eur-evt/-/tree/lfs-dataset) untergebracht.
 
 Der Rest der Readme-Datei stammt aus dem originalen Projekt und kann gerne nach Lust und Laune studiert werden:
 
