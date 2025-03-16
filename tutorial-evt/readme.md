@@ -113,7 +113,11 @@ Obige Schritte waren zur Einrichtung von Windows notwendig. Jetzt kann PyPSA-Eur
     ```bash
     snakemake solve_elec_networks --configfile config/test/config.electricity.yaml
     ```
-
+5. Vor weiteren Aufrufen von Snakmake ist es empfehlenswert, die Überbleibsel der Zwischenschritte der Pipeline zu leeren. Das kann einigen Problemen vorbeugen.
+   Befehl mit -Y quittieren. 
+    ```bash
+    snakemake purge
+    ```
 ## 1.4. Ausführen Europa-Simulation
 Sollte bisher alles geklappt haben, kann nun auch meine Simulation aus der Projektarbeit gestartet werden. Hier sollte abhängig vom PC eine längere Zeitspanne eingeplant werden. Ich erwarte rund 3 Stunden Simulationszeit.
 
