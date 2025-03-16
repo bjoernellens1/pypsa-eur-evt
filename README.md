@@ -14,12 +14,21 @@ SPDX-License-Identifier: CC-BY-4.0
 [![Stack Exchange questions](https://img.shields.io/stackexchange/stackoverflow/t/pypsa)](https://stackoverflow.com/questions/tagged/pypsa)
 
 # PyPSA-Eur - EVT Fork
+
+## Einleitung
 Dies ist ein Fork von PyPSA-Eur mit dem Ziel, eine stabile Umgebung für die Mitarbeiter des Lehrstuhls für Energieverbundtechnik zur Verfügung zu stellen.
 
+## Warum git?
+
+[![Git Explained in 100 Seconds](https://img.youtube.com/vi/hwP7WQkmECE/0.jpg)](https://www.youtube.com/watch?v=hwP7WQkmECE)
+
+## Hintergrund
 Derzeit wird dieses Repository mit dem upstream PyPSA-Eur Github repository abgeglichen. Das geschieht über den pull-mirror https://git.unileoben.ac.at/evt1/pypsa-eur.
 Wenn neuer Code zur Verfügung steht, kann dieser vom upstream bezogen werden:
 
 ![Update Fork](gitlab-update-fork.png)
+
+## Tutorial
 
 Zur schnellen Installation am Arbeitsrechner bitte **diesem Link zum Tutorial** folgen: [Tutorial PyPSA-Eur am EVT unter Windows](tutorial-evt/)
 
