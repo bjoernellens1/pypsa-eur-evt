@@ -17,6 +17,9 @@ SPDX-License-Identifier: CC-BY-4.0
 Dies ist ein Fork von PyPSA-Eur mit dem Ziel, eine stabile Umgebung für die Mitarbeiter des Lehrstuhls für Energieverbundtechnik zur Verfügung zu stellen.
 
 Derzeit wird dieses Repository mit dem upstream PyPSA-Eur Github repository abgeglichen. Das geschieht über den pull-mirror https://git.unileoben.ac.at/evt1/pypsa-eur.
+Wenn neuer Code zur Verfügung steht, kann dieser vom upstream bezogen werden:
+
+![Update Fork](gitlab-update-fork.png)
 
 Zur schnellen Installation am Arbeitsrechner bitte **diesem Link zum Tutorial** folgen: [Tutorial PyPSA-Eur am EVT unter Windows](tutorial-evt/)
 
