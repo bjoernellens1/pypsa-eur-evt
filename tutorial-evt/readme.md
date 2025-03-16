@@ -70,7 +70,7 @@ Dazu folgende Befehle im Terminal von VS Code (oder Ubuntu Terminal aus dem Star
     ```
     Alle Fragen akzeptieren und auch die letzte Frage mit Ja (yes oder y) beantworten.
 14. Damit ist Conda installiert, aber noch nicht im Terminal verfügbar. Dazu muss das Terminal neu instanziert werden, sprich Terminal schließen und wieder öffnen, danach wieder mit "cd" ins "work" Verzeichnis wechseln.
-15. Nun kann entweder der master Branch heruntergeladen werden, um mit der aktuellsten Version zu arbeiten, oder es wird LFS (Large File Storage) genutzt, um schneller die benötigten Datensätze herunterzuladen. Hier spielt der Vorteil eine Rolle, dass das originale PyPSA-Eur Repository auf unserem MUL-Gitlab Server gespiegelt wurde.
+15. Nun kann entweder ein **versionierter Branch** (tagged branch) heruntergeladen werden, um mit der aktuellsten getesteten Version zu arbeiten, oder es wird der **lfs-dataset Branch** (LFS=Large File Storage) genutzt, um schneller die benötigten Datensätze herunterzuladen. Hier spielt der Vorteil eine Rolle, dass das originale PyPSA-Eur Repository auf unseren MUL-Gitlab Server gespiegelt wurde und somit weit schnellerer Zugriff aus dem Uninetzwerk möglich ist.
 Daher ist es je nach Bedarf eine gute Idee, auch git LFS (Git Large File Storage) nachzuinstallieren, da ich so die kompletten Daten meiner Versuche mit pypsa-eur zur verfügung stellen kann. Dazu existiert jetzt ein eigener branch "lfs-dataset".
     ```bash
     sudo apt update && sudo apt install -y git-lfs # Hier wird das sudo Passwort verlangt. Das ist das Benutzerpasswort.
@@ -82,10 +82,11 @@ Daher ist es je nach Bedarf eine gute Idee, auch git LFS (Git Large File Storage
     Dieser Prozess kann ein paar Minuten dauern, da ca. 16 GB heruntergeladen werden.
 
     **Alternative:**
-    Wenn nicht die vollen Daten benötigt werden, reicht es, nur den master Branch herunterzuladen. Dazu folgenden Befehl verwenden:
+    Wenn nicht die vollen Daten benötigt werden, genügt es nur den aktuellen tagged Branch herunterzuladen. Dazu folgenden Befehl verwenden:
     ```bash
-    git clone https://git.unileoben.ac.at/evt1/pypsa-eur-evt.git --single-branch -b master
+    git clone https://git.unileoben.ac.at/evt1/pypsa-eur-evt.git --single-branch -b v2025.01.0
     ```
+    Dieser Ansatz stellt derzeit die stabilste Lösung dar, da sich Versionierte Branches besser mit der Dokumentation vergleichen lassen.
 17. Ist das Repository gecloned können wir nun direkt im VS Code Hauptfenster weiterarbeiten. Dazu gehen wir auf "File" --> "Open Folder" und wählen im Popup-Dialog unter "work/pypsa-eur-evt" den Projektordner aus.
 Damit ist die Umgebung in VS Coder geöffnet. Von hier aus wird mit Pypsa-Eur weitergearbeitet.
 VS Code merkt sich diesen Pfad, daher kann er in Zukunft direkt nach dem Programmstart ausgewählt werden:
