@@ -79,7 +79,7 @@ Daher ist es je nach Bedarf eine gute Idee, auch git LFS (Git Large File Storage
     ```bash
     git clone https://git.unileoben.ac.at/evt1/pypsa-eur-evt -b lfs-dataset # Hier wird der User und Passwort verlangt, der zur Anmeldung bei Gitlab verwendet wird (Muonline Account).
     ```
-    Dieser Prozess kann ein paar Minuten dauern, da ca. 30 GB heruntergeladen werden.
+    Dieser Prozess kann ein paar Minuten dauern, da ca. 16 GB heruntergeladen werden.
 
     **Alternative:**
     Wenn nicht die vollen Daten benötigt werden, reicht es, nur den master Branch herunterzuladen. Dazu folgenden Befehl verwenden:
@@ -118,8 +118,17 @@ Obige Schritte waren zur Einrichtung von Windows notwendig. Jetzt kann PyPSA-Eur
     ```bash
     snakemake purge
     ```
-## 1.4. Ausführen Europa-Simulation
+## 1.4. Europa-Simulation
 Sollte bisher alles geklappt haben, kann nun auch meine Simulation aus der Projektarbeit gestartet werden. Hier sollte abhängig vom PC eine längere Zeitspanne eingeplant werden. Ich erwarte rund 3 Stunden Simulationszeit.
+
+### 1.4.1 Gurobi Lizenz
+PyPSA-Eur verwendet standardmäßig den Gurobi-Solver. Dies kann in der Konfigurationsdatei angepasst werden.
+Bei größeren Simulationen wie der folgenden wird Gurobi in der Testlizenz abbrechen. Daher ist es notwendig, die Lizenzdatei im HOME-Verzeichnis von Ubuntu abzulegen.
+WSL bietet dazu die Möglichkeit, eine automatisch angelegte Netzwerkfreigabe zu nutzen. Diese findet sich im normalen Windos Dateiexplorer links unter "Linux".
+In diesem Ordner kann die gesamte Dateistruktur des Ubuntu Systems durchforstet werden. Uns interessiert aber nur der /home/<dein-User> Ordner.
+Dort muss die gurobi.lic Datei abgelegt werden.
+
+### 1.4.2 Ausführen
 
     ```bash
     snakemake solve_elec_networks --configfile config/my_configs/config.128_wAT_entsoe.yaml
