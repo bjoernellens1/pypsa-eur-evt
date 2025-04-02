@@ -131,9 +131,9 @@ Dort muss die gurobi.lic Datei abgelegt werden.
 
 ### 1.4.2 Ausführen
 
-    ```bash
-    snakemake solve_elec_networks --configfile config/my_configs/config.128_wAT_entsoe.yaml
-    ```
+```bash
+snakemake solve_elec_networks --configfile config/my_configs/config.128_wAT_entsoe.yaml
+```
 
 Zur weiteren Information über Simulationsaufbau, wie PyPSA-Eur verwendet wird und woher die Konfigurationsparameter stammen, kann meine Projektarbeit durchgelesen werden: [Projektarbeit](projektarbeit-evt/projekt_energietechnik_pypsa.pdf)
 
