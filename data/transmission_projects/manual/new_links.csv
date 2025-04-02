@@ -1,6 +1,6 @@
 ,bus0,bus1,length,p_nom,project_status,build_year,tags,x0,y0,x1,y1
 TYNDP2024_153,Exeter (UK),Menuel (FR),220,1250,in_permitting,2031,"{name:France-Alderney-Britain,url:https://eepublicdownloads.blob.core.windows.net/public-cdn-container/tyndp-documents/TYNDP2024/240220_TYNDP2024_project_portfolio.xlsx}",-3.533899,50.718412,-1.469216,49.509594
-TYNDP2018_25,Tourbe (FR),Chilling (GB),247.2,1000,completed,2021,"{name:IFA2, url:https://en.wikipedia.org/wiki/IFA-2]",-0.172042,49.083593,-1.277269,50.839338
+TYNDP2018_25,Tourbe (FR),Chilling (GB),247.2,1000,completed,2021,"{name:IFA2, url:https://en.wikipedia.org/wiki/IFA-2}",-0.172042,49.083593,-1.277269,50.839338
 TYNDP2024_285,Kingsnorth (UK),Warande (FR),158,1250,in_permitting,2030,"{name:Gridlink, url:https://eepublicdownloads.blob.core.windows.net/public-cdn-container/tyndp-documents/TYNDP2024/240220_TYNDP2024_project_portfolio.xlsx}",0.596111111111111,51.41972,2.376776,51.034368
 TYNDP2024_16,Gatica (ES),Cubnezais (FR),370,2000,under_construction,2028,"{name:Biscay Gulf, url:https://eepublicdownloads.blob.core.windows.net/public-cdn-container/tyndp-documents/TYNDP2024/240220_TYNDP2024_project_portfolio.xlsx}",-2.867,43.367,-0.408943,45.074191
 TYNDP2018_21,Piossasco (IT),Grand Ile (FR),190,1000,completed,2023,"{name:Italy-France, url:https://www.terna.it/en/projects/projects-common-interest/italy-france-electrical-interconnection}",7.468,44.9898,6.045,45.472
