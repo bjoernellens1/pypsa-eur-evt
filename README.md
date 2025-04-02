@@ -9,40 +9,9 @@ SPDX-License-Identifier: CC-BY-4.0
 ![Size](https://img.shields.io/github/repo-size/pypsa/pypsa-eur)
 [![Zenodo PyPSA-Eur](https://zenodo.org/badge/DOI/10.5281/zenodo.3520874.svg)](https://doi.org/10.5281/zenodo.3520874)
 [![Zenodo PyPSA-Eur-Sec](https://zenodo.org/badge/DOI/10.5281/zenodo.3938042.svg)](https://doi.org/10.5281/zenodo.3938042)
-[![Snakemake](https://img.shields.io/badge/snakemake-≥7.7.0-brightgreen.svg?style=flat)](https://snakemake.readthedocs.io)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥8.14.0-brightgreen.svg?style=flat)](https://snakemake.readthedocs.io)
+[![Discord](https://img.shields.io/discord/911692131440148490?logo=discord)](https://discord.gg/AnuJBk23FU)
 [![REUSE status](https://api.reuse.software/badge/github.com/pypsa/pypsa-eur)](https://api.reuse.software/info/github.com/pypsa/pypsa-eur)
-[![Stack Exchange questions](https://img.shields.io/stackexchange/stackoverflow/t/pypsa)](https://stackoverflow.com/questions/tagged/pypsa)
-
-# PyPSA-Eur - EVT Fork
-
-## Einleitung
-Dies ist ein Fork von PyPSA-Eur mit dem Ziel, eine stabile Umgebung für die Mitarbeiter des Lehrstuhls für Energieverbundtechnik zur Verfügung zu stellen.
-
-## Warum git?
-
-[![Git Explained in 100 Seconds](https://img.youtube.com/vi/hwP7WQkmECE/0.jpg)](https://www.youtube.com/watch?v=hwP7WQkmECE)
-
-## Hintergrund
-Derzeit wird dieses Repository mit dem upstream PyPSA-Eur Github repository abgeglichen. Das geschieht über den pull-mirror https://git.unileoben.ac.at/evt1/pypsa-eur.
-Wenn neuer Code zur Verfügung steht, kann dieser vom upstream bezogen werden:
-
-![Update Fork](gitlab-update-fork.png)
-
-## Tutorial
-
-Zur schnellen Installation am Arbeitsrechner bitte **diesem Link zum Tutorial** folgen: [Tutorial PyPSA-Eur am EVT unter Windows](tutorial-evt/)
-
-Um den master-Branch sauber zu halten, sind die großen Datensätze nun in einem extra Branch [lfs-dataset](https://git.unileoben.ac.at/evt1/pypsa-eur-evt/-/tree/lfs-dataset) untergebracht.
-
-Der Rest der Readme-Datei stammt aus dem originalen Projekt und kann gerne nach Lust und Laune studiert werden:
-
----
-
----
-
-
-
-
 
 # PyPSA-Eur: A Sector-Coupled Open Optimisation Model of the European Energy System
 
@@ -126,9 +95,7 @@ repository](https://doi.org/10.5281/zenodo.3601881).
 
 # Contributing and Support
 We strongly welcome anyone interested in contributing to this project. If you have any ideas, suggestions or encounter problems, feel invited to file issues or make pull requests on GitHub.
--   In case of code-related **questions**, please post on [stack overflow](https://stackoverflow.com/questions/tagged/pypsa).
--   For non-programming related and more general questions please refer to the [mailing list](https://groups.google.com/group/pypsa).
--   To **discuss** with other PyPSA users, organise projects, share news, and get in touch with the community you can use the [discord server](https://discord.com/invite/AnuJBk23FU).
+-   To **discuss** with other PyPSA users, organise projects, share news, and get in touch with the community you can use the [Discord server](https://discord.gg/AnuJBk23FU).
 -   For **bugs and feature requests**, please use the [PyPSA-Eur Github Issues page](https://github.com/PyPSA/pypsa-eur/issues).
 
 # Licence
