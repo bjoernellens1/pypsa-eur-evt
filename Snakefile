@@ -63,7 +63,8 @@ include: "rules/build_sector.smk"
 include: "rules/solve_electricity.smk"
 include: "rules/postprocess.smk"
 include: "rules/development.smk"
-
+### MA rules
+include: "rules/MA/build_austrian_network.smk"
 
 if config["foresight"] == "overnight":
 
@@ -78,7 +79,6 @@ if config["foresight"] == "myopic":
 if config["foresight"] == "perfect":
 
     include: "rules/solve_perfect.smk"
-
 
 rule all:
     input:

@@ -1,0 +1,8 @@
+name: pypsa-eur
+channels:
+  - conda-forge
+dependencies:
+  - pypsa
+  - geopandas
+  - shapely
+  - pandas
