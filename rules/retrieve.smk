@@ -476,6 +476,27 @@ if config["enable"]["retrieve"]:
     # Downloading protected area database from WDPA
     # extract the main zip and then merge the contained 3 zipped shapefiles
     # Website: https://www.protectedplanet.net/en/thematic-areas/wdpa
+    # rule download_wdpa:
+    #     input:
+    #         zip=storage(url, keep_local=True),
+    #     params:
+    #         zip="data/WDPA_shp.zip",
+    #         folder=directory("data/WDPA"),
+    #     output:
+    #         gpkg="data/WDPA.gpkg",
+    #     run:
+    #         shcopy(input.zip, params.zip)
+    #         unpack_archive(params.zip, params.folder)
+
+    #         for i in range(3):
+    #             # vsizip is special driver for directly working with zipped shapefiles in ogr2ogr
+    #             layer_path = (
+    #                 f"/vsizip/{params.folder}/WDPA_{bYYYY}_Public_shp_{i}.zip"
+    #             )
+    #             print(f"Adding layer {i+1} of 3 to combined output file.")
+    #             shell("ogr2ogr -f gpkg -update -append {output.gpkg} {layer_path}")
+
+    ### improved rule
     rule download_wdpa:
         input:
             zip=storage(url, keep_local=True),
@@ -485,15 +506,19 @@ if config["enable"]["retrieve"]:
         output:
             gpkg="data/WDPA.gpkg",
         run:
+            import glob
+            import os
+
             shcopy(input.zip, params.zip)
             unpack_archive(params.zip, params.folder)
 
-            for i in range(3):
-                # vsizip is special driver for directly working with zipped shapefiles in ogr2ogr
-                layer_path = (
-                    f"/vsizip/{params.folder}/WDPA_{bYYYY}_Public_shp_{i}.zip"
-                )
-                print(f"Adding layer {i+1} of 3 to combined output file.")
+            zip_files = sorted(
+                glob.glob(os.path.join(params.folder, "WDPA_*_Public_shp_*.zip"))
+            )
+
+            for i, path in enumerate(zip_files):
+                layer_path = f"/vsizip/{path}"
+                print(f"Adding layer {i+1} of {len(zip_files)} to combined output file.")
                 shell("ogr2ogr -f gpkg -update -append {output.gpkg} {layer_path}")
 
     rule download_wdpa_marine:
