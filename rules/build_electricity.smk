@@ -648,7 +648,7 @@ def input_conventional(w):
         if str(fn).startswith("data/")
     }
 
-
+### Changed for MA
 rule add_electricity:
     params:
         line_length_factor=config_provider("lines", "length_factor"),
@@ -670,7 +670,7 @@ rule add_electricity:
     input:
         unpack(input_profile_tech),
         unpack(input_conventional),
-        base_network=resources("networks/base_s_{clusters}.nc"),
+        base_network=resources("networks/base_s_{clusters}_merged.nc"),
         tech_costs=lambda w: resources(
             f"costs_{config_provider('costs', 'year')(w)}.csv"
         ),

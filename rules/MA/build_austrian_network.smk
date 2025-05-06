@@ -6,7 +6,5 @@ rule build_austrian_network:
         network="resources/networks/austria.nc"
     conda:
         "envs/pypsa-eur.yaml"
-#    script:
-#        "../../scripts/MA/build_austrian_network.py"
     notebook:
         "notebooks/build_austrian_network.py.ipynb"
