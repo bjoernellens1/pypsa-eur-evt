@@ -1,0 +1,66 @@
+run:
+  name: min_entsoe
+  disable_progressbar: false
+  shared_resources:
+    policy: false
+  shared_cutouts: true
+scenario:
+  simpl:
+  - ''
+  ll:
+  - vopt
+  clusters:
+  - 41
+  opts:
+  - ''
+  sector_opts:
+  - ''
+  planning_horizons:
+  - ''
+countries:
+- AL
+- AT
+- BA
+- BE
+- BG
+- CH
+- CZ
+- DE
+- DK
+- EE
+- ES
+- FI
+- FR
+- GB
+- GR
+- HR
+- HU
+- IE
+- IT
+- LT
+- LU
+- LV
+- ME
+- MD
+- MK
+- NL
+- 'NO'
+- PL
+- PT
+- RO
+- RS
+- SE
+- SI
+- SK
+- UA
+electricity:
+  custom_powerplants: true
+  co2limit: 95900000.0
+  co2base: 1918000000.0
+lines:
+  reconnect_crimea: false
+enable:
+  retrieve: true
+  retrieve_databundle: true
+  retrieve_cost_data: true
+  retrieve_cutout: true
