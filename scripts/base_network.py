@@ -763,6 +763,8 @@ def base_network(
 
     if carriers:
         n.add("Carrier", carriers)
+    
+    n.export_to_netcdf("basemap_V1") #sepp
 
     return n
 

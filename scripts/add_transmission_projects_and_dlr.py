@@ -100,5 +100,5 @@ if __name__ == "__main__":
             max_voltage_difference,
             max_line_rating,
         )
-
+    n.export_to_netcdf("basemap_V2") #sepp
     n.export_to_netcdf(snakemake.output[0])
