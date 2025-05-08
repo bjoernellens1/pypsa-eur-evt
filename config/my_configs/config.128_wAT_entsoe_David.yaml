@@ -1,0 +1,68 @@
+run:
+  name: 128_wAT_entsoe_David
+  disable_progressbar: false
+  shared_resources:
+    policy: false
+  shared_cutouts: true
+scenario:
+  simpl:
+  - ''
+  ll:
+  - vopt
+  clusters:
+  - 128
+  opts:
+  - ''
+  sector_opts:
+  - ''
+  planning_horizons:
+  - ''
+  # 2020 / 2030 / 2040 / 2050
+  countries: ['AL', 'AT', 'BA', 'BE', 'BG', 'CH', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'ME', 'MK', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'SE', 'SI', 'SK', 'XK']
+
+electricity:
+  custom_powerplants: true
+  co2limit: 95900000.0
+  co2base: 1918000000.0
+  base_network: osm-prebuilt
+
+lines:
+  reconnect_crimea: false
+  max_line_rating: false
+
+transmission_projects:
+  enable: true
+  include:
+    tyndp2020: true
+    nep: true
+    manual: true
+
+enable:
+  retrieve: true
+  retrieve_databundle: true
+  retrieve_cost_data: true
+  retrieve_cutout: true
+
+clustering:
+  level:
+    AT: 1
+    
+snapshots:
+  start: "2013-01-01"
+  end: "2014-01-01"
+  inclusive: 'left'
+
+costs:
+  year: 2030
+
+solver:
+    name: gurobi
+    options: gurobi-default
+
+solving:
+  solver: # Select the solver
+    name: gurobi
+    options: gurobi-default
+  solver_options:
+    gurobi-default:
+      threads: 8 # Use more of the RAM ! Check message in the terminal about reducing 

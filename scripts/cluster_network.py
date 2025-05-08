@@ -556,6 +556,7 @@ if __name__ == "__main__":
         # append_bus_shapes(nc, clustered_regions, type=which.split("_")[1])
 
     nc.meta = dict(snakemake.config, **dict(wildcards=dict(snakemake.wildcards)))
+    nc.export_to_netcdf("basemap_V4") #sepp
     nc.export_to_netcdf(snakemake.output.network)
 
     logger.info(
