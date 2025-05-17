@@ -109,3 +109,8 @@ Zb wie add transmission projects.
 - Plotted the data with appropriate styling to visualize comparisons.
 - Saved the plot as a high-resolution image and embedded it into a PDF.
 
+
+## Meeting 08.05.25
+### Szenario
+Residuallasten zb als csv. Mit mehr Knoten. Wieder auf pypsa-netzwerk aufteilen.
+Zugriff datenbank?
