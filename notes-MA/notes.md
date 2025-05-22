@@ -112,5 +112,14 @@ Zb wie add transmission projects.
 
 ## Meeting 08.05.25
 ### Szenario
-Residuallasten zb als csv. Mit mehr Knoten. Wieder auf pypsa-netzwerk aufteilen.
-Zugriff datenbank?
+Residuallasten zb als csv. Mit mehr Knoten. Wieder auf pypsa-netzwerk aufteilen.Residual load
+
+In the context of electricity systems and PyPSA, residual load refers to the net demand for electricity after accounting for renewable energy generation, like wind and solar. Essentially, it's the remaining load that needs to be met by other sources, such as conventional power plants. 
+
+Zugriff datenbank? check
+
+## Fortschritt 21.05.2025
+snakemake ausführen mit --sdm conda
+```bash
+snakemake solve_elec_networks --configfile config/MA/config.128_wAT_entsoe_MA.yaml --sdm conda
+```
