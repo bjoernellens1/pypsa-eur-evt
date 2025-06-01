@@ -123,3 +123,61 @@ snakemake ausführen mit --sdm conda
 ```bash
 snakemake solve_elec_networks --configfile config/MA/config.128_wAT_entsoe_MA.yaml --sdm conda
 ```
+
+## Meeting 22.05.2025
+### Fragen:
+- Szenarien? --> Ändern config file, zb:
+    - cluster size
+    - Transmission projects
+    - Merge austria ...
+    - add_extra_components
+- Residuallasten. Beispiel CSV
+    - Wo, wann laden? Überschreiben?
+- einbauen in Workflow:
+    - in der rule.smk configfile referenzieren und mit if-statements arbeiten. Lässt sich dan nauch mit wildcards verbinden?
+
+
+
+Knoten: Übrig gebliebene mit nächstem Knoten verbinden.
+
+
+Residuallasten Datenbank:
+energiemengen und zeitprofile auf 1 normiert.
+Dzt keine Residuallast csv.
+Residuallasten verteilen auf die Knotenanzahl
+
+CSV werte in gigawatt, tausende zeitschritte
+
+
+Szenarion: unterschiedliche Residuallasten verwenden.
+
+achtung ubereinstimmung node matpower und pypsa csv
+alles ausßer powerstations anschauen
+
+## 01.06.2025
+### Vorgehensweise merge_austrian_network
+Prozess funktioniert bis auf Knoten Reschenpass (IT) und Pradella (CH). Außerdem noch überprüfen Leupolz (D) und Fuessen (D).
+
+#### Ablauf:
+1. Pypsa-Eur Netz bis Clustering aus normalem Ablauf erzeugt (hier network1 genannt).
+2. Danach über build_austrian_network_postgis EVT-Netzwerk über postgres geladen und daraus ein PyPSA Netzwerk (Österreich Detailliert) erzeugt. Namen werden auf substation_name gemappt, lines aus from_node & to_node zusammengebaut (hier networkAT genannt).
+3. Entstandenes Netzwerk (networkAT) soll in merge_austrian_network mit großem PyPSA-Eur Netzwerk (network1) kombiniert werden. Dazu werden folgende Regeln befolgt:
+
+    - Buses aus network1 werden mit networkAT abgeglichen und bei Abweichungen auf Koordinaten von networkAT verschoben. Das erfolgt 1:1 nach nächstem Nachbarn.
+    - Nicht behandelte Grenzknoten (buses) aus networkAT werden gesucht, als neuer Knoten in network 1 eingefügt und mit den beiden nächsten Nachbarknoten verbunden. Dazu soll ein Nachbarknoten in Österreich liegen und einer außerhalb. Zu Verbindung werden neue Leitungen (lines) erzeugt.
+    - Sollte bereits parallel eine line verlaufen, wird diese aufgeteilt und der Knoten dazwischen eingefügt.
+    - PROBLEM: Knoten Reschenpass (IT) und Pradella (CH) werden bisher nicht nach IT bzw. CH verbunden
+
+        - Das kann daran liegen, dass Reschenpass und Pradella nahe beieinander liegen und der algorithmus nicht berücksichtigt, dass diese Knoten nicht untereinander verbunden werden sollen.
+        - --> Logik erweitern, um solchen Ausreißern vorzubeugen.
+4. Am Schluss überprüfen, ob merge erfolgreich war. Am besten in eigener Regel.
+
+#### Offene Punkte:
+- Neue Regeln schön in PyPSA-eur einbetten, am besten ohne Ändern des *Snakefile* im Hauptordner.
+- Parametrierung der Regeln, damit alles direkt im Configfile angepasst werden kannn.
+- Möglichkeit für Szenarien
+- Residuallasten: Fertige Residuallasten aus Datenbank auf AT Knoten verteilen
+
+#### Optimierung:
+- networkAT buses direkt mit "AT*" benennen, bzw. ISO2 codes für Länder
+- 
