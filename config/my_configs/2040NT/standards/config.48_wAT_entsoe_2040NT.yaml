@@ -1,0 +1,130 @@
+run:
+  name: 48_wAT_entsoe_2040NT
+  disable_progressbar: false
+  shared_resources:
+    policy: false
+  shared_cutouts: true
+
+scenario:
+  simpl:
+  - ''
+  ll:
+  - vopt
+  clusters:
+  - 48
+  opts:
+  - ''
+  sector_opts:
+  - ''
+  planning_horizons:
+  - 2040
+  # 2020 / 2030 / 2040 / 2050
+  # ist glaube ich nur für sector-coupling scenarios relevant
+countries: ['AL', 'AT', 'BA', 'BE', 'BG', 'CH', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'ME', 'MK', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'SE', 'SI', 'SK', 'XK']
+
+electricity:
+  custom_powerplants: true
+  co2limit: 95900000.0
+  co2base: 1918000000.0
+  base_network: osm-prebuilt
+
+lines:
+  reconnect_crimea: false
+  max_line_rating: false
+  max_extension: 0 #MW
+
+links:
+  max_extension: 0 #MW
+
+transmission_projects:
+  enable: false
+  include:
+    tyndp2020: false
+    nep: false
+    manual: false
+  skip:
+  - upgraded_lines
+  - upgraded_links
+  - new_lines
+  - new_links
+  status:
+  #- aponew
+  #- in_permitting
+  #- confirmed
+  #- planned_not_yet_permitted
+  #- under_construction
+  #- under_consideration
+  new_link_capacity: keep #keep or zero
+
+enable:
+  retrieve: true
+  retrieve_databundle: true
+  retrieve_cost_data: true
+  retrieve_cutout: true
+
+clustering:
+  focus_weights:
+    'AL': 0.0208333333333333
+    'AT': 0.0208333333333333
+    'BA': 0.0208333333333333
+    'BE': 0.0208333333333333
+    'BG': 0.0208333333333333
+    'CH': 0.0208333333333333
+    'CZ': 0.0208333333333333
+    'DE': 0.0208333333333333
+    'DK': 0.0416666666666667
+    'EE': 0.0208333333333333
+    'ES': 0.0416666666666667
+    'FI': 0.0208333333333333
+    'FR': 0.0416666666666667
+    'GB': 0.0416666666666667
+    'GR': 0.0208333333333333
+    'HR': 0.0208333333333333
+    'HU': 0.0208333333333333
+    'IE': 0.0208333333333333
+    'IT': 0.125
+    'LT': 0.0208333333333333
+    'LU': 0.0208333333333333
+    'LV': 0.0208333333333333
+    'ME': 0.0208333333333333
+    'MK': 0.0208333333333333
+    'NL': 0.0208333333333333
+    'NO': 0.0625
+    'PL': 0.0208333333333333
+    'PT': 0.0208333333333333
+    'RO': 0.0208333333333333
+    'RS': 0.0208333333333333
+    'SE': 0.0833333333333333
+    'SI': 0.0208333333333333
+    'SK': 0.0208333333333333
+    'XK': 0.0208333333333333
+
+
+  temporal:
+    resolution_elec: 1h
+         
+snapshots:
+  start: "2013-01-01"
+  end: "2014-01-01"
+  inclusive: 'left'
+  
+atlite:
+  default_cutout: europe-2013-sarah3-era5
+
+costs:
+  year: 2040
+
+solving:
+  solver:
+    name: gurobi
+    options: gurobi-default
+  solver_options:
+    gurobi-default:
+      threads: 32
+      method: 2 # barrier
+      crossover: 0
+      BarConvTol: 1.e-6
+      Seed: 123
+      AggFill: 0
+      PreDual: 0
+      GURO_PAR_BARDENSETHRESH: 200

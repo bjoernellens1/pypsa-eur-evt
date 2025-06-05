@@ -1,0 +1,4 @@
+data/transmission_projects/tyndp2020/new_links.csv
+data/transmission_projects/tyndp2020/upgraded_links.csv
+data/transmission_projects/tyndp2020/new_lines.csv
+data/transmission_projects/tyndp2020/upgraded_lines.csv

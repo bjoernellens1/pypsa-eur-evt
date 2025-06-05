@@ -159,6 +159,7 @@ def distribute_n_clusters_to_countries(
         .sum()
         .pipe(normed)
     )
+    L.to_csv("L_vector1.csv")
 
     N = n.buses.groupby(["country", "sub_network"]).size()[L.index]
 
@@ -172,14 +173,50 @@ def distribute_n_clusters_to_countries(
         assert total_focus <= 1.0, (
             "The sum of focus weights must be less than or equal to 1."
         )
-
+        
+        pd.Series(focus_weights).to_csv("focus_weights.csv")
         for country, weight in focus_weights.items():
             L[country] = weight / len(L[country])
 
+        L = L.copy()
+
+        min_focus_value = min(focus_weights.values())  # globaler minimaler Fokuswert
+
+        for country, total_weight in focus_weights.items():
+            # Filter L nach dem aktuellen Land
+            mask = L.index.get_level_values("country") == country
+            entries = L[mask]
+
+            if len(entries) == 1:
+                L[country] = total_weight
+                continue  # überspringe, falls Land nicht in L vorhanden
+
+            # Unterscheide Subnetzwerke == 0 und != 0
+            is_zero_subnet = entries.index.get_level_values("sub_network") == entries.index.get_level_values("sub_network").min()
+            is_nonzero_subnet = ~is_zero_subnet
+
+            n_nonzero = is_nonzero_subnet.sum()
+
+            # Berechne Restgewicht für Subnetzwerk 0
+            rest_weight = total_weight - n_nonzero * min_focus_value
+            if rest_weight < 0:
+                raise ValueError(
+                    f"Focus weight for {country} ({total_weight}) is too small "
+                    f"to assign {n_nonzero} non-zero sub-networks with {min_focus_value} each."
+                )
+
+            # Setze die Werte entsprechend
+            L[mask] = 0.0
+            L.loc[entries[is_nonzero_subnet].index] = min_focus_value
+            if any(is_zero_subnet):
+                L.loc[entries[is_zero_subnet].index] = rest_weight
+
+        L.to_csv("L_vector2.csv")
         remainder = [
             c not in focus_weights.keys() for c in L.index.get_level_values("country")
         ]
         L[remainder] = L.loc[remainder].pipe(normed) * (1 - total_focus)
+        L.to_csv("L_vector3.csv")
 
         logger.warning("Using custom focus weights for determining number of clusters.")
 
@@ -202,6 +239,8 @@ def distribute_n_clusters_to_countries(
         )
         solver_name = "scip"
     m.solve(solver_name=solver_name)
+    cluster_result = m.solution["n"].to_series().astype(int)
+    cluster_result.to_csv("cluster_allocation.csv")
     return m.solution["n"].to_series().astype(int)
 
 

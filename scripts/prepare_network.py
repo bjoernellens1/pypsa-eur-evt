@@ -273,11 +273,11 @@ def set_line_nom_max(
     s_nom_max_ext=np.inf,
     p_nom_max_ext=np.inf,
 ):
-    if np.isfinite(s_nom_max_ext) and s_nom_max_ext > 0:
+    if np.isfinite(s_nom_max_ext) and s_nom_max_ext >= 0:
         logger.info(f"Limiting line extensions to {s_nom_max_ext} MW")
         n.lines["s_nom_max"] = n.lines["s_nom"] + s_nom_max_ext
 
-    if np.isfinite(p_nom_max_ext) and p_nom_max_ext > 0:
+    if np.isfinite(p_nom_max_ext) and p_nom_max_ext >= 0:
         logger.info(f"Limiting link extensions to {p_nom_max_ext} MW")
         hvdc = n.links.index[n.links.carrier == "DC"]
         n.links.loc[hvdc, "p_nom_max"] = n.links.loc[hvdc, "p_nom"] + p_nom_max_ext
