@@ -181,3 +181,29 @@ Prozess funktioniert bis auf Knoten Reschenpass (IT) und Pradella (CH). Außerde
 #### Optimierung:
 - networkAT buses direkt mit "AT*" benennen, bzw. ISO2 codes für Länder
 - 
+
+#### Portabilität
+- containerisierung des workflows über Snakemake und Docker:
+```bash
+ snakemake --containerize > Dockerfile
+ # Dockerfile bearbeiten, erste 3 Zeilen rauslöschen
+ # login bei git.unileoben.ac.at container registry
+ docker login git.unileoben.ac.at:5050
+ # image build, tag und upload
+ docker build -t git.unileoben.ac.at:5050/evt1/pypsa-eur-evt . --push
+
+```
+- Ausführen von snakemake mit dem Image:
+Image definieren im Snakefile (global) oder per rule
+```bash
+snakemake --sdm aptainer
+```
+
+### Update 10.06.2025
+- merge_austrian_network fast fehlerfrei, es müssen noch redundante Leitungen entfernt werden.
+- läuft, bis auf eine Leitung:
+![Ergebnis Merge](image.png)
+
+### Update 13.06.2025
+- Residuallasten einfügen für Österreichische Knoten aus notebooks-MA/Residuallast:
+    - Möglichkeit der Parametrierung für Szenarien (NIP2030 oder NIP2040)

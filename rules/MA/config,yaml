@@ -1,0 +1,10 @@
+scenario: NIP2030
+resolution: 128
+
+inputs:
+  nachfrage: "data/Nachfrage.csv"
+  pv: "data/PV.csv"
+  wind: "data/Wind.csv"
+  biomasse: "data/biomasse.csv"
+  gross_wasserkraft: "data/GrossWasserkraft.csv"
+  klein_wasserkraft: "data/Kleinwasserkraft.csv"

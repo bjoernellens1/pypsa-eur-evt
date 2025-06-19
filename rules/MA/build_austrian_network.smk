@@ -1,3 +1,4 @@
+container: "docker://git.unileoben.ac.at:5050/evt1/pypsa-eur-evt:latest"
 rule build_austrian_network:
     # input:
     #     buses="data/MA/shapefiles/buses_aut.shp",
