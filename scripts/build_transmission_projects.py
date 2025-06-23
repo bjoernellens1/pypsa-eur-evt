@@ -540,6 +540,9 @@ if __name__ == "__main__":
         new_links_df["length"] = new_links_df.apply(
             fill_length_from_geometry, args=(line_factor,), axis=1
         )
+        new_links_df["p_min_pu"] = -1
+        new_links_df["marginal_cost"] = 0
+        new_links_df["efficiency"] = 1
         # Whether to keep existing link capacity or set to zero
         not_upgraded = ~new_links_df.index.str.contains("upgraded")
         if transmission_projects["new_link_capacity"] == "keep":

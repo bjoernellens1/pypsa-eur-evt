@@ -66,6 +66,7 @@ Exemplary unsolved network clustered to 37 nodes:
 import logging
 import warnings
 from functools import reduce
+import os
 
 import geopandas as gpd
 import linopy
@@ -298,7 +299,6 @@ def distribute_n_clusters_to_countries(
         .sum()
         .pipe(normed)
     )
-    L.to_csv("L_vector1.csv")
 
     N = n.buses.groupby(["country", "sub_network"]).size()[L.index]
 
@@ -350,12 +350,10 @@ def distribute_n_clusters_to_countries(
             if any(is_zero_subnet):
                 L.loc[entries[is_zero_subnet].index] = rest_weight
 
-        L.to_csv("L_vector2.csv")
         remainder = [
             c not in focus_weights.keys() for c in L.index.get_level_values("country")
         ]
         L[remainder] = L.loc[remainder].pipe(normed) * (1 - total_focus)
-        L.to_csv("L_vector3.csv")
 
         logger.warning("Using custom focus weights for determining number of clusters.")
 
@@ -378,10 +376,7 @@ def distribute_n_clusters_to_countries(
         )
         solver_name = "scip"
     m.solve(solver_name=solver_name)
-    cluster_result = m.solution["n"].to_series().astype(int)
-    cluster_result.to_csv("cluster_allocation.csv")
     return m.solution["n"].to_series().astype(int)
-
 
 def busmap_for_n_clusters(
     n: pypsa.Network,
@@ -637,6 +632,53 @@ def update_bus_coordinates(
     n.buses["x"] = busmap_df["x"]
     n.buses["y"] = busmap_df["y"]
 
+def change_power_lines(n, filename="line_link_updates.xlsx"):
+    """
+    Update s_nom for lines and p_nom for links based on an Excel file.
+    """
+    # Path of this script file (where the function is defined)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, filename)
+
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"Excel file not found: {file_path}")
+
+    df = pd.read_excel(file_path)
+
+    for _, row in df.iterrows():
+        comp = row["component"]
+        bus0 = row["bus0"]
+        bus1 = row["bus1"]
+        new_nom = row["new_nominal_value"]
+
+        if comp == "line":
+            match = n.lines[(n.lines.bus0 == bus0) & (n.lines.bus1 == bus1)]
+            if match.empty:
+                print(f"No matching line: {bus0} -> {bus1}")
+                continue
+            for idx in match.index:
+                n.lines.at[idx, "s_nom"] = new_nom
+                new_num_parallel = (
+                n.lines.at[idx, "s_nom"] / 
+                (n.lines.at[idx, "i_nom"] * n.lines.at[idx, "v_nom"] * np.sqrt(3))
+                )       
+                n.lines.at[idx, "num_parallel"] = new_num_parallel  
+                print(f"Updated line {idx}: s_nom = {new_nom}")
+                print(f"Updated line {idx}: num_parallel = {new_num_parallel }")
+
+        elif comp == "link":
+            match = n.links[(n.links.bus0 == bus0) & (n.links.bus1 == bus1)]
+            if match.empty:
+                print(f"No matching link: {bus0} -> {bus1}")
+                continue
+            for idx in match.index:
+                n.links.at[idx, "p_nom"] = new_nom
+                print(f"Updated link {idx}: p_nom = {new_nom}")
+
+        else:
+            print(f"Unknown component: {comp}")
+    
+    return n
 
 if __name__ == "__main__":
     if "snakemake" not in globals():
@@ -747,8 +789,6 @@ if __name__ == "__main__":
         # append_bus_shapes(nc, clustered_regions, type=which.split("_")[1])
 
     nc.meta = dict(snakemake.config, **dict(wildcards=dict(snakemake.wildcards)))
-    nc.export_to_netcdf("basemap_V4") #sepp
-    nc.export_to_netcdf(snakemake.output.network)
 
     logger.info(
         f"Clustered network:\n"
@@ -756,3 +796,7 @@ if __name__ == "__main__":
         f"Lines: {lines_prev} to {len(nc.lines)}\n"
         f"Links: {links_prev} to {len(nc.links)}"
     )
+
+    nc = change_power_lines(nc)
+    nc.export_to_netcdf("basemap_V4.nc") #sepp
+    nc.export_to_netcdf(snakemake.output.network)
