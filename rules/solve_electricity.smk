@@ -2,7 +2,47 @@
 #
 # SPDX-License-Identifier: MIT
 
-
+# Rule: solve_network
+# -------------------
+# Solves the electricity network optimization problem using parameters and inputs dynamically loaded from the config file.
+#
+# Parameters:
+#   - solving: Dictionary of solving options from config.
+#   - foresight: Foresight setting from config.
+#   - co2_sequestration_potential: Maximum CO2 sequestration allowed (default: 200).
+#   - custom_extra_functionality: Additional custom functionality for the solver.
+#
+# Input:
+#   - network: Path to the input network file, dynamically determined from config or default pattern.
+#
+# Output:
+#   - network: Path to the solved network file.
+#   - config: Path to the configuration file used for this run.
+#
+# Log:
+#   - solver: Log file for solver output.
+#   - memory: Log file for memory usage.
+#   - python: Log file for Python execution.
+#
+# Benchmark:
+#   - Benchmark file for this rule's execution.
+#
+# Threads:
+#   - Number of threads for the solver, specified by `solver_threads`.
+#
+# Resources:
+#   - mem_mb: Memory allocation for the rule.
+#   - runtime: Maximum runtime, from config (default: 6h).
+#
+# Shadow:
+#   - Uses shadow directory as specified by `shadow_config`.
+#
+# Conda:
+#   - Uses the environment specified in "../envs/environment.yaml".
+#
+# Script:
+#   - Executes "../scripts/solve_network.py" to perform the network solving.
+## Altered for MA (Masterarbeit) workflow. Dynamic loading from configfile
 rule solve_network:
     params:
         solving=config_provider("solving"),
@@ -13,6 +53,12 @@ rule solve_network:
         custom_extra_functionality=input_custom_extra_functionality,
     input:
         network=resources("networks/base_s_{clusters}_elec_{opts}.nc"),
+    # input:
+    #     network=resources("networks/base_s_{clusters}_elec_residualload.nc"),
+    # input:
+    #     network=lambda wildcards: config.get(
+    #         "solve_network_input",
+    #         resources(f"networks/base_s_{wildcards.clusters}_elec_{wildcards.opts}.nc")        ),
     output:
         network=RESULTS + "networks/base_s_{clusters}_elec_{opts}.nc",
         config=RESULTS + "configs/config.base_s_{clusters}_elec_{opts}.yaml",

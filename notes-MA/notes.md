@@ -207,3 +207,37 @@ snakemake --sdm aptainer
 ### Update 13.06.2025
 - Residuallasten einfügen für Österreichische Knoten aus notebooks-MA/Residuallast:
     - Möglichkeit der Parametrierung für Szenarien (NIP2030 oder NIP2040)
+
+## Update 22.06.2025
+### Snakemake Workflow and Rule Customization
+- The workflow was extended to allow scenario-specific and modular integration of custom rules, especially for the injection of residual loads into the PyPSA-Eur network.
+- A wrapper Snakefile (`Snakefile.residual_loads`) was created. This file includes the main workflow and custom rules, enabling the addition of new steps (like residual load injection) without modifying upstream files. This approach maintains compatibility with future updates from the main repository.
+- The rules `add_electricity` and `solve_network` were refactored to allow their input files to be specified dynamically via the config file. This was achieved by using a lambda function in the `input` section of each rule, which checks for a config key (e.g., `add_electricity_base_network` or `solve_network_input`) and falls back to the default if not set. This makes it possible to inject custom network files (such as those with residual loads) for specific scenarios or experiments.
+- The config file was updated to include the new keys:
+  ```yaml
+  add_electricity_base_network: "resources/networks/{scenario}/base_s_{clusters}_elec_residualload.nc"
+  solve_network_input: "resources/networks/{scenario}/base_s_{clusters}_elec_residualload.nc"
+  ```
+- This setup allows for flexible scenario management and reproducible research, as all workflow customizations can be controlled via the config file and wrapper Snakefile, without the need for manual code changes in the main workflow.
+
+### Update 22.06.2025 (continued)
+#### Changes in Snakemake Rule Files (.smk)
+- The rules `add_electricity` (in `build_electricity.smk`) and `solve_network` (in `solve_electricity.smk`) were modified to support dynamic input file selection via the config file.
+- For both rules, the `input` section now uses a lambda function that checks for a config key (e.g., `add_electricity_base_network` or `solve_network_input`). If the key is present, its value is used as the input file; otherwise, the rule falls back to the default file pattern using wildcards. This preserves all variable options and ensures backward compatibility.
+- Example for `add_electricity`:
+  ```python
+  base_network=lambda w: config.get(
+      "add_electricity_base_network",
+      resources(f"networks/base_s_{w.clusters}.nc")
+  ),
+  ```
+- Example for `solve_network`:
+  ```python
+  network=lambda wildcards: config.get(
+      "solve_network_input",
+      resources(f"networks/base_s_{wildcards.clusters}_elec_{wildcards.opts}.nc")
+  ),
+  ```
+- These changes make it possible to inject custom network files (such as those with residual loads) for specific scenarios or experiments, controlled entirely from the config file.
+
+---

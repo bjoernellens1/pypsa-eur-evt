@@ -63,10 +63,11 @@ include: "rules/build_sector.smk"
 include: "rules/solve_electricity.smk"
 include: "rules/postprocess.smk"
 include: "rules/development.smk"
+
 ### MA rules
 # include: "rules/MA/build_austrian_network.smk"
 # include: "rules/MA/merge_austrian_network.smk"
-include: "rules/MA/evt_MA_austria.smk"
+# include: "rules/MA/evt_MA_austria.smk"
 
 if config["foresight"] == "overnight":
 

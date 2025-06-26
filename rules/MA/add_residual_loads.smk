@@ -7,7 +7,7 @@ residual_cfg = austria_cfg["residual_loads"]
 
 scenario = residual_cfg["scenario"]
 input_dir = residual_cfg["input_dir"]
-cluster = scenario_cfg["clusters"][0]
+clusters = scenario_cfg["clusters"][0]
 
 # Fully resolve file paths
 inputs = {
@@ -35,7 +35,7 @@ rule prepare_residual_inputs:
 rule map_residual_to_buses:
   input:
     residual=f"residual/{scenario}/residual_inputs.parquet",
-    network=f"resources/networks/base_s_{cluster}_merged.nc"
+    network=f"resources/networks/base_s_{clusters}_merged.nc"
   output:
     f"residual/{scenario}/mapped_residual_inputs.parquet"
   params:
@@ -47,9 +47,10 @@ rule map_residual_to_buses:
 rule inject_residual_loads:
   input:
     mapped=f"residual/{scenario}/mapped_residual_inputs.parquet",
-    network=f"resources/networks/base_s_{cluster}_merged.nc"
+    network=f"resources/networks/base_s_{clusters}_elec.nc"
   output:
-    f"networks/{scenario}/base_s_{cluster}_elec_residualload.nc"
+    # f"resources/networks/{scenario}/base_s_{cluster}_elec_residualload.nc"
+    f"resources/networks/base_s_{clusters}_elec_residualload.nc"
   params:
     config=residual_cfg
   notebook:

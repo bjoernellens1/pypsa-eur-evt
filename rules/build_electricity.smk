@@ -648,7 +648,65 @@ def input_conventional(w):
         if str(fn).startswith("data/")
     }
 
-### Changed for MA
+# Rule: add_electricity
+#
+# Description:
+#   This rule adds electricity-related data and processing to the base network for the model.
+#   It dynamically loads configuration values using the `config_provider` function, allowing
+#   for flexible and parameterized workflows. The rule integrates various input datasets,
+#   including technology profiles, conventional generation, costs, regions, powerplants,
+#   hydro capacities, unit commitment, fuel prices, demand, and bus mapping. Outputs are
+#   written as updated network files. Logging, benchmarking, resource allocation, and
+#   environment management are also specified.
+#
+# Parameters:
+#   - line_length_factor: Factor for scaling line lengths (from config).
+#   - link_length_factor: Factor for scaling link lengths (from config).
+#   - scaling_factor: Scaling factor for load (from config).
+#   - countries: List of countries to include (from config).
+#   - snapshots: Time snapshots for simulation (from config).
+#   - renewable: Renewable energy configuration (from config).
+#   - electricity: Electricity system configuration (from config).
+#   - conventional: Conventional generation configuration (from config).
+#   - costs: Cost parameters (from config).
+#   - foresight: Foresight settings (from config).
+#   - drop_leap_day: Whether to drop leap day (from config).
+#   - consider_efficiency_classes: Whether to consider efficiency classes in clustering (from config).
+#   - aggregation_strategies: Strategies for aggregating clusters (from config).
+#   - exclude_carriers: Carriers to exclude from clustering (from config).
+#
+# Inputs:
+#   - input_profile_tech: Technology profile input files (unpacked).
+#   - input_conventional: Conventional generation input files (unpacked).
+#   - base_network: Base network file, dynamically selected based on clusters.
+#   - tech_costs: Technology cost file, dynamically selected based on year.
+#   - regions: GeoJSON file with regional information.
+#   - powerplants: CSV file with powerplant data.
+#   - hydro_capacities: CSV file with hydro capacities.
+#   - unit_commitment: CSV file with unit commitment data.
+#   - fuel_price: Monthly fuel price CSV, conditionally included.
+#   - load: NetCDF file with electricity demand.
+#   - busmap: CSV file mapping buses to clusters.
+#
+# Outputs:
+#   - Updated network file with electricity data (NetCDF).
+#
+# Logs:
+#   - Log file for the rule execution.
+#
+# Benchmarks:
+#   - Benchmark file for performance tracking.
+#
+# Resources:
+#   - 1 thread.
+#   - 10,000 MB memory.
+#
+# Conda Environment:
+#   - Uses the environment specified in ../envs/environment.yaml.
+#
+# Script:
+#   - Executes ../scripts/add_electricity.py for processing.
+## Altered for MA (Masterarbeit): Dynamic loading of config values
 rule add_electricity:
     params:
         line_length_factor=config_provider("lines", "length_factor"),
@@ -670,7 +728,11 @@ rule add_electricity:
     input:
         unpack(input_profile_tech),
         unpack(input_conventional),
-        base_network=resources("networks/base_s_{clusters}_merged.nc"),
+        base_network=resources("networks/base_s_{clusters}_merged.nc"),  # Retained for reference; replaced by a dynamic lambda function
+        # base_network=lambda w: config.get(
+        #     "add_electricity_base_network",
+        #     resources(f"networks/base_s_{w.clusters}.nc")
+        # ),
         tech_costs=lambda w: resources(
             f"costs_{config_provider('costs', 'year')(w)}.csv"
         ),
@@ -717,7 +779,9 @@ rule prepare_network:
         drop_leap_day=config_provider("enable", "drop_leap_day"),
         transmission_limit=config_provider("electricity", "transmission_limit"),
     input:
-        resources("networks/base_s_{clusters}_elec.nc"),
+        # resources("networks/base_s_{clusters}_elec.nc"),
+        resources("networks/base_s_{clusters}_elec_residualload.nc"),
+        # resources("networks/base_s_{clusters}_elec.nc"),
         tech_costs=lambda w: resources(
             f"costs_{config_provider('costs', 'year')(w)}.csv"
         ),

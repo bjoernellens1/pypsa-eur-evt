@@ -15,6 +15,12 @@ scenario:
   sector_opts: [""]
   planning_horizons: [""]
 
+# docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#snapshots
+snapshots:
+  start: "2013-01-01"
+  end: "2014-01-01"
+  inclusive: 'left'
+
 countries:
 - AL
 - AT
@@ -101,9 +107,27 @@ clustering:
 
 solving:
   solver:
-    name: gurobi
-    options: gurobi-default-threads
+    name: gurobi #highs #gurobi
+    options: gurobi-default-threads #highs-default #gurobi-default-threads
   solver_options:
+    highs-default:
+      # refer to https://ergo-code.github.io/HiGHS/dev/options/definitions/
+      threads: 0 #0 means automatic #1
+      solver: "ipm"
+      run_crossover: "off"
+      small_matrix_value: 1e-6
+      large_matrix_value: 1e9
+      primal_feasibility_tolerance: 1e-5
+      dual_feasibility_tolerance: 1e-5
+      ipm_optimality_tolerance: 1e-4
+      parallel: "on"
+      random_seed: 123
+    highs-simplex:
+      solver: "simplex"
+      parallel: "on"
+      primal_feasibility_tolerance: 1e-5
+      dual_feasibility_tolerance: 1e-5
+      random_seed: 123
     gurobi-default-threads:
       threads: 20
       method: 2
@@ -147,6 +171,7 @@ austria:
   output_network: "resources/networks/austria.nc"
   residual_loads:
     scenario: "NIP2030"
+    sim_year: 2013
     input_dir: "data/MA/loads"
     inputs:
       nachfrage: "{input_dir}/{scenario}/Nachfrage.csv"
@@ -155,3 +180,5 @@ austria:
       biomasse: "{input_dir}/{scenario}/biomasse.csv"
       gross_wasserkraft: "{input_dir}/{scenario}/GrossWasserkraft.csv"
       klein_wasserkraft: "{input_dir}/{scenario}/Kleinwasserkraft.csv"
+add_electricity_base_network: "resources/networks/base_s_{clusters}_elec_residualloadadd.nc"
+solve_network_input: "resources/networks/base_s_{clusters}_elec_residualload.nc"
