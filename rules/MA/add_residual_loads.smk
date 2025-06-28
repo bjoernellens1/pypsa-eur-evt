@@ -35,7 +35,7 @@ rule prepare_residual_inputs:
 rule map_residual_to_buses:
   input:
     residual=f"residual/{scenario}/residual_inputs.parquet",
-    network=f"resources/networks/base_s_{clusters}_merged.nc"
+    network=f"resources/networks/base_s_{clusters}_elec.nc"
   output:
     f"residual/{scenario}/mapped_residual_inputs.parquet"
   params:
