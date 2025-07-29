@@ -779,8 +779,8 @@ rule prepare_network:
         drop_leap_day=config_provider("enable", "drop_leap_day"),
         transmission_limit=config_provider("electricity", "transmission_limit"),
     input:
-        # resources("networks/base_s_{clusters}_elec.nc"),
-        resources("networks/base_s_{clusters}_elec_residualload.nc"),
+        resources("networks/base_s_{clusters}_elec.nc"),
+        # resources("networks/base_s_{clusters}_elec_residualload.nc"),
         # resources("networks/base_s_{clusters}_elec.nc"),
         tech_costs=lambda w: resources(
             f"costs_{config_provider('costs', 'year')(w)}.csv"

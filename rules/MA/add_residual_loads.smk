@@ -36,6 +36,7 @@ rule map_residual_to_buses:
   input:
     residual=f"residual/{scenario}/residual_inputs.parquet",
     network=f"resources/networks/base_s_{clusters}_elec.nc"
+    # network=f"resources/networks/base_s_{clusters}_merged.nc"
   output:
     f"residual/{scenario}/mapped_residual_inputs.parquet"
   params:
@@ -48,6 +49,7 @@ rule inject_residual_loads:
   input:
     mapped=f"residual/{scenario}/mapped_residual_inputs.parquet",
     network=f"resources/networks/base_s_{clusters}_elec.nc"
+    # network=f"resources/networks/base_s_{clusters}_merged.nc"
   output:
     # f"resources/networks/{scenario}/base_s_{cluster}_elec_residualload.nc"
     f"resources/networks/base_s_{clusters}_elec_residualload.nc"

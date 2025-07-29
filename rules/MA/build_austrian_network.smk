@@ -4,7 +4,7 @@ rule build_austrian_network:
     #     buses="data/MA/shapefiles/buses_aut.shp",
     #     lines="data/MA/shapefiles/lines_aut.shp"
     output:
-        network="resources/networks/austria.nc"
+        network= resources("networks/austria.nc") #"resources/networks/austria.nc"
     conda:
         "envs/pypsa-eur.yaml"
     notebook:

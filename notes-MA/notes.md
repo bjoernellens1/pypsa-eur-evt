@@ -241,3 +241,9 @@ snakemake --sdm aptainer
 - These changes make it possible to inject custom network files (such as those with residual loads) for specific scenarios or experiments, controlled entirely from the config file.
 
 ---
+
+### Update 30.06.2025
+- Klarstellung Stefan: Zeitreihen in Einheit GW, NIP2030 hat viel PV Produktion, daher negative Residuallasten für Österreich
+- Wichtig: Herausfinden, wie loads in pypsa-eur gebildet werden:
+    - ![graph-add-electricity](image-3.png)
+    - Dann 
